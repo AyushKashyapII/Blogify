@@ -1,0 +1,25 @@
+---
+import "../styles/global.css";
+---
+
+<html lang="en" class="bg-gray-900 text-white">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><slot name="title" /></title>
+  </head>
+  <body class="font-sans bg-gray-900">
+    <header
+      class="fixed top-0 w-full px-6 py-4 flex justify-end space-x-6 text-sm backdrop-blur-md bg-[#0d0d11]/70 text-gray-300"
+    >
+      <a href="/work" class="hover:text-white">work</a>
+      <a href="/projects" class="hover:text-white">projects</a>
+      <a href="/blog" class="hover:text-white">blog</a>
+      <button class="hover:text-white">🌙</button>
+    </header>
+
+    <main class="pt-28">
+      <slot />
+    </main>
+  </body>
+</html>

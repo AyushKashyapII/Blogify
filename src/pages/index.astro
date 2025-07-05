@@ -1,16 +1,57 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+title: "Your Name";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<section class="mt-32 max-w-3xl mx-auto px-6 text-gray-300">
+  <div class="text-center">
+    <!-- Placeholder logo -->
+    <div
+      class="w-12 h-12 mx-auto mb-6 rounded-full bg-gray-700 flex items-center justify-center"
+    >
+      <span class="text-2xl">🐾</span>
+    </div>
+
+    <h1 class="text-2xl font-bold text-white">
+      Your Name<br />
+      <span class="font-semibold text-lg text-gray-300">Software Engineer</span>
+    </h1>
+
+    <p class="mt-6 text-gray-400 leading-relaxed">
+      I am a <em
+        >software engineer, UI/UX designer, product planner, problem solver,
+        mentor, forever student, minimalist</em
+      >, and <em>eternal optimist</em>.
+    </p>
+    <p class="mt-4 text-gray-400">
+      I love to both <strong>build</strong> and <strong>break</strong> things. I
+      am motivated by challenging projects with self-guided research and dynamic
+      problem solving. My true passion is crafting creative front end designs with
+      unique takes on color, typography and motion.
+    </p>
+    <p class="mt-4 text-gray-400">
+      This is my personal space, where I share my work and projects. I also
+      write interactive blog posts about engineering and design.
+    </p>
+  </div>
+
+  <div class="mt-20">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-lg font-semibold text-white">Work</h2>
+      <a href="/work" class="text-sm text-blue-400 hover:underline"
+        >See all work</a
+      >
+    </div>
+
+    <div class="mb-6 p-5 rounded-lg bg-[#18181b] border border-gray-800">
+      <h3 class="font-semibold text-white">StreamlineFS</h3>
+      <p class="text-sm text-gray-400">
+        Software Engineer<br />Nov 2019 - Current
+      </p>
+      <p class="mt-2 text-gray-400">
+        Currently, I am a software engineer at Streamline FS where I do product
+        engineering and design for scalable web applications.
+      </p>
+    </div>
+  </div>
+</section>
