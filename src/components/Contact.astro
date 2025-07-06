@@ -1,0 +1,45 @@
+---
+// Contact.astro - For blog pages
+---
+
+<div class="contact-container">
+    <p class="contact-message">
+        If you have any suggestions for this project or any questions, feel free
+        to reach out to me.
+    </p>
+    <button
+        class="footer-top-btn"
+        onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        >&uarr; Back to top</button
+    >
+</div>
+
+<style>
+    .contact-container {
+        max-width: 32rem;
+        margin: 2.5rem auto 0 auto;
+        padding: 1.5rem 1rem 2rem 1rem;
+        text-align: center;
+    }
+    .contact-message {
+        font-size: 1.1rem;
+        color: var(--text);
+        margin-bottom: 1.2rem;
+    }
+    .footer-top-btn {
+        background: none;
+        border: 1px solid var(--text);
+        color: var(--text);
+        border-radius: 6px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        font-size: 1rem;
+        transition:
+            background 0.2s,
+            color 0.2s;
+    }
+    .footer-top-btn:hover {
+        background: var(--hover-bg);
+        color: var(--link);
+    }
+</style>

@@ -1,29 +1,37 @@
 ---
-const title = "My Astro LEarning Blog";
-import Navigation from "../components/Navigation.astro";
+import Header from "../components/Header.astro";
+title: "Ayush Kashyap";
+import "../styles/global.css";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>Astro</title>
-    <style>
-      body {
-        background-color: azure;
-        color: rgb(233, 211, 211);
-      }
-    </style>
-  </head>
-  <body>
-    <Navigation />
+<section class="mt-32 max-w-3xl mx-auto px-6 text-gray-300">
+  <Header />
 
-    <h1>{title}</h1>
-    <p>This is where I will post about my journey learning Astro.</p>
-    <ul>
-      <li><a href="/posts/post-1/">Post 1</a></li>
-      <li><a href="/posts/post-2/">Post 2</a></li>
-      <li><a href="/posts/post-3/">Post 3</a></li>
-    </ul>
-  </body>
-</html>
+  <div class="under-construction-icon" style="margin-top:2.5rem;">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="38"
+      height="38"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      ><rect x="2" y="6" width="20" height="8" rx="1"></rect><path d="M17 14v7"
+      ></path><path d="M7 14v7"></path><path d="M17 3v3"></path><path d="M7 3v3"
+      ></path><path d="M10 14 2.3 6.3"></path><path d="m14 6 7.7 7.7"
+      ></path><path d="m8 6 8 8"></path></svg
+    >
+  </div>
+  <div class="under-construction-text">
+    <h1
+      style="font-size:1.5rem;font-weight:700;margin-bottom:0.5rem;color:#ddc484;"
+    >
+      This page is under construction
+    </h1>
+    <p style="color:#888;font-size:1.1rem;">
+      I am currently building it, so check back soon!
+    </p>
+  </div>
+</section>
