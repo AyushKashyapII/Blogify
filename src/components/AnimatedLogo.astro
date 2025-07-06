@@ -1,0 +1,246 @@
+---
+// src/components/AnimatedLogo.astro
+---
+
+<div class="animated-logo-container">
+    <div class="logo" id="animated-logo">
+        <!-- Main logo circle -->
+        <div class="logo-face">
+            <!-- Left eye -->
+            <div class="eye left-eye">
+                <div class="pupil" id="left-pupil"></div>
+            </div>
+
+            <!-- Right eye -->
+            <div class="eye right-eye">
+                <div class="pupil" id="right-pupil"></div>
+            </div>
+
+            <!-- Mouth/smile -->
+            <div class="mouth"></div>
+        </div>
+
+        <!-- Hover effect -->
+        <div class="hover-effect"></div>
+    </div>
+</div>
+
+<style>
+    .animated-logo-container {
+        display: inline-block;
+        position: relative;
+    }
+
+    .logo {
+        position: relative;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+        transform: scale(1.05);
+    }
+
+    .logo-face {
+        width: 100%;
+        height: 100%;
+        background: white;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .eye {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        top: 12px;
+        border-radius: 50%;
+        background: #f0f0f0;
+    }
+
+    .left-eye {
+        left: 10px;
+    }
+
+    .right-eye {
+        right: 10px;
+    }
+
+    .pupil {
+        width: 6px;
+        height: 6px;
+        background: #1a1a1a;
+        border-radius: 50%;
+        position: absolute;
+        transition: transform 0.1s ease;
+        transform-origin: center;
+    }
+
+    .pupil.blinking {
+        transform: scaleY(0);
+    }
+
+    .mouth {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 16px;
+        height: 8px;
+        border-bottom: 2px solid #1a1a1a;
+        border-radius: 0 0 16px 16px;
+    }
+
+    .hover-effect {
+        position: absolute;
+        inset: 0;
+        background: #3b82f6;
+        border-radius: 50%;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .logo:hover .hover-effect {
+        opacity: 0.1;
+    }
+
+    /* Responsive sizing */
+    @media (max-width: 768px) {
+        .logo {
+            width: 32px;
+            height: 32px;
+        }
+
+        .eye {
+            width: 5px;
+            height: 5px;
+            top: 10px;
+        }
+
+        .left-eye {
+            left: 8px;
+        }
+
+        .right-eye {
+            right: 8px;
+        }
+
+        .pupil {
+            width: 5px;
+            height: 5px;
+        }
+
+        .mouth {
+            bottom: 6px;
+            width: 12px;
+            height: 6px;
+        }
+    }
+</style>
+
+<script>
+    class AnimatedLogo {
+        constructor() {
+            this.logo = document.getElementById("animated-logo");
+            this.leftPupil = document.getElementById("left-pupil");
+            this.rightPupil = document.getElementById("right-pupil");
+            this.mousePos = { x: 0, y: 0 };
+            this.isBlinking = false;
+
+            this.init();
+        }
+
+        init() {
+            if (!this.logo || !this.leftPupil || !this.rightPupil) return;
+
+            this.setupMouseTracking();
+            this.setupBlinking();
+        }
+
+        setupMouseTracking() {
+            document.addEventListener("mousemove", (e) => {
+                if (!this.logo) return;
+
+                const rect = this.logo.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                this.mousePos = {
+                    x: e.clientX - centerX,
+                    y: e.clientY - centerY,
+                };
+
+                this.updateEyePositions();
+            });
+        }
+
+        updateEyePositions() {
+            if (this.isBlinking) return;
+
+            const maxDistance = 3;
+            const distance = Math.sqrt(
+                this.mousePos.x * this.mousePos.x +
+                    this.mousePos.y * this.mousePos.y,
+            );
+            const normalizedDistance = Math.min(distance / 100, 1);
+
+            const offsetX =
+                distance > 0
+                    ? (this.mousePos.x / distance) *
+                      maxDistance *
+                      normalizedDistance
+                    : 0;
+            const offsetY =
+                distance > 0
+                    ? (this.mousePos.y / distance) *
+                      maxDistance *
+                      normalizedDistance
+                    : 0;
+
+            this.leftPupil.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            this.rightPupil.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        }
+
+        setupBlinking() {
+            const blink = () => {
+                this.isBlinking = true;
+                this.leftPupil.classList.add("blinking");
+                this.rightPupil.classList.add("blinking");
+
+                setTimeout(() => {
+                    this.isBlinking = false;
+                    this.leftPupil.classList.remove("blinking");
+                    this.rightPupil.classList.remove("blinking");
+                }, 150);
+            };
+
+            const scheduleNextBlink = () => {
+                const delay = 2000 + Math.random() * 3000; // 2-5 seconds
+                setTimeout(() => {
+                    blink();
+                    scheduleNextBlink();
+                }, delay);
+            };
+
+            scheduleNextBlink();
+        }
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener("DOMContentLoaded", () => {
+        new AnimatedLogo();
+    });
+
+    // Also initialize immediately in case DOMContentLoaded already fired
+    if (document.readyState === "loading") {
+        // DOM is still loading
+    } else {
+        // DOM is already loaded
+        new AnimatedLogo();
+    }
+</script>
