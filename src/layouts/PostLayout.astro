@@ -5,6 +5,7 @@ import Header from "../components/Header.astro";
 import "../styles/global.css";
 ---
 
+<div id="progress-bar" style="position: fixed; top: 0; left: 0; width: 0%; height: 4px; background-color: #ddc484; z-index: 9999;"></div>
 <article class="prose prose-invert max-w-3xl mx-auto px-6 py-16 space-y-10">
   <Header />
   <header>
@@ -27,3 +28,14 @@ import "../styles/global.css";
 
   <Contact />
 </article>
+<script>
+  document.addEventListener('scroll', () => {
+    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrolled = window.scrollY;
+    const scrolledPercentage = (scrolled / scrollableHeight) * 100;
+    const progressBar = document.getElementById('progress-bar');
+    if (progressBar) {
+      progressBar.style.width = `${scrolledPercentage}%`;
+    }
+  });
+</script>

@@ -2,6 +2,7 @@
 layout: ../../layouts/PostLayout.astro
 title: "How I Built SignCast"
 publishDate: 2025-07-10
+description: "A project to automatically generate sign language translations for any YouTube video using AI avatars."
 ---
 
 <div class="blog-post-content">
